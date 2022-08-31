@@ -91,8 +91,6 @@ cout << "Enter three words: ";
 getline(cin, word);
 cout << "You entered: "<< '"' << word << '"'<< endl;
 
-
-
 return 0;
 
 }
