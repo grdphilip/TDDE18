@@ -3,7 +3,7 @@ mycket i detta fall så jag nöjer mig med en ordentlig förklaring. Ni
 kör isMinHeap i er insert, vilket ökar tidskomplexiteten till O(n)
 (Thete(n) till och med). Jag är förvånad att ni ser någon skillnad
 alls. Vi bör alltid köra swim på elementet, och kan således ta bort
-if-satsen helt och får då ner tidskomplexiteten till O(log(n)).
+if-satsen helt och får då ner tidskomplexen till O(log(n)).
 
 Toss har i originalutförandet O(1) tidskomplexitet, så problemet är
 att vi måste återställa heapegenskapen i deleteMin för hela heapen
