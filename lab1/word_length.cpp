@@ -13,10 +13,6 @@ string lword{};
 string sword{"kortaste"};
 int i{0};
 double sum{0};
-bool longer;
-
-
-//myFile.open("message.txt", ios::out); 
 
 while(myFile >> temp) {
     
@@ -28,7 +24,7 @@ while(myFile >> temp) {
         sword = temp;
     }
 
-  i++;
+  i++; 
   sum += double(temp.length());
 }
 
