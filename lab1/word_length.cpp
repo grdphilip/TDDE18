@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 
@@ -10,12 +11,16 @@ int main() {
 ifstream myFile{"message.txt"};
 string temp{};
 string lword{};
-string sword{"kortaste"};
+string sword{};
 int i{0};
 double sum{0};
 
+
 while(myFile >> temp) {
-    
+    if(sword.length() == 0) {
+        sword = temp;
+        lword = temp;
+    }
     if(lword.length() < temp.length()) {
         lword = temp;
     } 
