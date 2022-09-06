@@ -1,0 +1,18 @@
+Godkänt. Egentligen borde ni få en komplettering, men det ger inte
+mycket i detta fall så jag nöjer mig med en ordentlig förklaring. Ni
+kör isMinHeap i er insert, vilket ökar tidskomplexiteten till O(n)
+(Thete(n) till och med). Jag är förvånad att ni ser någon skillnad
+alls. Vi bör alltid köra swim på elementet, och kan således ta bort
+if-satsen helt och får då ner tidskomplexen till O(log(n)).
+
+Toss har i originalutförandet O(1) tidskomplexitet, så problemet är
+att vi måste återställa heapegenskapen i deleteMin för hela heapen
+(fixHeap, O(n) amorterat, O(nlog(n)) i värsta fallet). Om vi fixar
+till er insert har båda metoderna O(log(n)) vilket är betydligt
+effektivare vid normal användning.
+
+Värt att notera är att toss metoden kommer att signifikant spara
+totalt antal operationer om vi först gör alla insättningar för att
+sedan börja göra borttagningar då fixHeap bara körs en enda gång(ex:
+HeapSort). 
+
