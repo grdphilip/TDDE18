@@ -27,6 +27,7 @@ while(myFile >> temp) {
 
     if(temp.length() < sword.length()){
         sword = temp;
+ 
     }
 
   i++; 
