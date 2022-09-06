@@ -29,7 +29,7 @@ int main() {
 
     cout << "Enter last price: ";
     cin >> lastPrice;
-    while(firstPrice > lastPrice) {
+    while(firstPrice >= lastPrice) {
         cerr << "ERROR: Last price must be greater than first price" << endl;
         cout << "Enter last price: ";
         cin >> lastPrice;
@@ -45,7 +45,7 @@ int main() {
 
     cout << "Enter tax percent: ";
     cin >> taxPercentage;
-    while(taxPercentage < 0 || taxPercentage > 100) {
+    while(taxPercentage <= 0 || taxPercentage >= 100) {
         cerr << "ERROR: Tax percent must be between 0.01 and 99.9 percent" << endl;
         cout << "Enter tax percent: ";
         cin >> taxPercentage;
