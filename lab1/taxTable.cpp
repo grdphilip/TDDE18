@@ -17,13 +17,9 @@ int main() {
     cout << "INPUT PART" << endl
         << setfill('=') << setw(10) << "\n"
         << "Enter first price: ";
-<<<<<<< HEAD
 
 
     
-=======
-        
->>>>>>> b9d582f5c58a90b6da8795b4b00ec12f205c4c21
     cin >> firstPrice;
     while(firstPrice < 0) {
         cerr << "ERROR: First price must be at least 0 (zero) SEK" << endl;
