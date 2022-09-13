@@ -12,4 +12,10 @@ CHECK(is_valid(t) == true);
 
 }
 
+TEST_CASE("Is am") {
+    Time t{11,59,59};
+
+    CHECK(is_am(t) == true);
+}
+
 

@@ -9,6 +9,10 @@ struct Time {
 bool is_valid(Time t);
 bool is_am(Time const& t);
 
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> 00c212c (Edit)
 Time& operator +(Time& t, int SS);
 Time& operator ++(Time& t);
 Time operator ++(Time& t, inte);
@@ -25,3 +29,7 @@ bool operator >=(Time const& a, Time const& b);
 
 Time ostream& operator <<(ostream& out, Time const& t);
 Time istream& operator >>(iatream& in, Time& t);
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> 00c212c (Edit)
