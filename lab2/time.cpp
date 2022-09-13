@@ -6,15 +6,15 @@ using namespace std;
 
 bool is_valid(Time t) {
 
-    if (t.hours > 23) {
+    if (t.HH > 23) {
 
         return false;
 
-    } else if (t.minutes > 59) {
+    } else if (t.MM > 59) {
 
         return false;
 
-    } else if (t.seconds > 59) {
+    } else if (t.SS > 59) {
 
         return false;
 
@@ -26,5 +26,5 @@ bool is_valid(Time t) {
 
 bool is_am(Time const &t)
 {
-    return (t.hours < 12);
+    return (t.HH < 12);
 }
