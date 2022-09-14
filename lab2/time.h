@@ -8,16 +8,19 @@ struct Time {
 
 bool is_valid(Time t);
 bool is_am(Time const& t);
-/*
-Time& operator +(Time& t, int SS);
+bool operator ==(Time const& a, Time const& b);
+bool operator !=(Time const& a, Time const& b);
+Time& operator +(Time& t, int sec);
 Time& operator ++(Time& t);
-Time operator ++(Time& t, inte);
+Time operator ++(Time& t, int);
+
+/*
+
 Time& operator -(Time& t, int sec);
 Time& operator --(Time& t);
 Time operator --(Time& t, int sec);
 
 bool operator ==(Time const& a, Time const& b);
-bool operator !=(Time const& a, Time const& b);
 bool operator <(Time const& a, Time const& b);
 bool operator >(Time const& a, Time const& b);
 bool operator <=(Time const& a, Time const& b);
