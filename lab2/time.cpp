@@ -123,7 +123,7 @@ Time &operator++(Time &time)
     return time;
 }
 
-Time operator++(Time &time, int)
+Time operator++(Time &time, int)    REQUIRE(is_am(t) == true);
 {
     time = time + 1;
     return time;
