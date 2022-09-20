@@ -5,26 +5,36 @@
 
 using namespace std;
 
+// Testa normalfall, hörnfall och saker som inte ska funka
+// Require stoppar programmet ifall testet failar, borde användas på vitala grejer
+
 TEST_CASE("Is valid")
 {
 
     Time t{00, 00, 00};
+    REQUIRE(is_valid(t) == true);
+     
+      Time t1{25, 00, 00};
+      Time t2{135, 00, 00};
+    REQUIRE_FALSE(is_valid(t1) == true);
+    REQUIRE_FALSE(is_valid(t2) == true);
 
-    CHECK(is_valid(t) == true);
 }
 
 TEST_CASE("Is am")
 {
-    Time t{11, 59, 59};
+    Time t1{11, 59, 59};
+    REQUIRE(is_am(t1) == true);
 
-    CHECK(is_am(t) == true);
+    Time t2{13, 59, 59};
+    REQUIRE_FALSE(is_am(t2) == true);
 }
 
 TEST_CASE("to string 24 hour time")
 {
     Time t1{22, 23, 23};
-
     CHECK(to_string(t1, false) == "22:23:23");
+
 }
 
 TEST_CASE("to string regular time// am")
@@ -46,7 +56,7 @@ TEST_CASE("Operator ==")
     Time t1{11, 11, 11};
     Time t2{11, 11, 11};
 
-    CHECK(t1 == t2);
+    REQUIRE(t1 == t2);
 }
 
 TEST_CASE("Operator!=")
@@ -60,9 +70,14 @@ TEST_CASE("Operator!=")
 TEST_CASE("Operator +")
 {
     Time t1{23, 59, 59};
-    Time t2{01, 00, 00};
+    Time t2{23, 59, 59};
+    Time t3{00, 00, 00};
+    Time t4{01, 00, 00};
 
-    CHECK(t1 + 3601 == t2);
+    REQUIRE(t1 + 3601 == t4);
+    REQUIRE(t2 + 1 == t3);
+    REQUIRE_FALSE(t1 + 3 == t3);
+
 }
 
 TEST_CASE("Operator ++x")
@@ -71,6 +86,7 @@ TEST_CASE("Operator ++x")
     Time t2{00, 00, 00};
 
     CHECK(++t1 == t2);
+    CHECK_FALSE(++t1 == t2+4);
 }
 
 TEST_CASE("Operator x++")
@@ -79,6 +95,7 @@ TEST_CASE("Operator x++")
     Time t2{12, 00, 01};
 
     CHECK(t1++ == t2);
+    CHECK_FALSE(t1++ == t2 + 4);
 }
 
 TEST_CASE("Operator -")
@@ -87,6 +104,7 @@ TEST_CASE("Operator -")
     Time t2{23, 59, 59};
 
     CHECK(t1 - 1 == t2);
+    CHECK_FALSE(t1 - 5 == t2);
 }
 
 TEST_CASE("Operator --x")
@@ -95,6 +113,7 @@ TEST_CASE("Operator --x")
     Time t2{23, 59, 59};
 
     CHECK(--t1 == t2);
+    CHECK_FALSE(--t1 == t2-234234);
 }
 
 TEST_CASE("Operator x--")
@@ -103,6 +122,7 @@ TEST_CASE("Operator x--")
     Time t2{23, 59, 59};
 
     CHECK(t1-- == t2);
+    CHECK_FALSE(--t1 == t2-2342);
 }
 
 TEST_CASE("Operator >")
@@ -111,6 +131,7 @@ TEST_CASE("Operator >")
     Time t2{11, 15, 19};
 
     CHECK(t1 > t2);
+    CHECK_FALSE(t1 < t2);
 }
 
 TEST_CASE("Operator <")
@@ -119,6 +140,7 @@ TEST_CASE("Operator <")
     Time t2{11, 15, 20};
 
     CHECK(t1 < t2);
+    CHECK_FALSE(t1 > t2);
 }
 
 TEST_CASE("Operator >=")
@@ -127,11 +149,14 @@ TEST_CASE("Operator >=")
     Time t2{11, 11, 11};
 
     CHECK(t1 >= t1);
+    CHECK_FALSE(t2 >= t1);
+    
 
     t1 = {11, 11, 11};
     t2 = {11, 11, 11};
 
     CHECK(t1 >= t2);
+    CHECK_FALSE(t1 != t2);
 }
 
 TEST_CASE("Operator <=")
@@ -140,6 +165,7 @@ TEST_CASE("Operator <=")
     Time t2{11, 11, 12};
 
     CHECK(t1 <= t2);
+    CHECK_FALSE(t2 <= t1);
 
     t1 = {11, 11, 11};
     t2 = {11, 11, 11};
@@ -154,6 +180,7 @@ TEST_CASE("Operator <<")
     out << t1;
 
     CHECK(out.str() == to_string(t1, 0));
+
 }
 
 TEST_CASE("Operator >>") {
@@ -161,9 +188,14 @@ TEST_CASE("Operator >>") {
     stringstream in{"23:40:41"};
     in >> t1;
 
-    CHECK(t1.HH == 23);
-    CHECK(t1.MM == 40);
-    CHECK(t1.SS == 41);
+    REQUIRE(t1.HH == 23);
+    REQUIRE(t1.MM == 40);
+    REQUIRE(t1.SS == 41);
+        
+    REQUIRE_FALSE(t1.HH == 22);
+    REQUIRE_FALSE(t1.MM == 45);
+    REQUIRE_FALSE(t1.SS == 48);
+
 }
 
 
