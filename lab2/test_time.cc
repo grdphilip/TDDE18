@@ -184,6 +184,7 @@ TEST_CASE("Operator <<")
 }
 
 TEST_CASE("Operator >>") {
+
     Time t1{};
     stringstream in{"23:40:41"};
     in >> t1;
@@ -191,10 +192,21 @@ TEST_CASE("Operator >>") {
     REQUIRE(t1.HH == 23);
     REQUIRE(t1.MM == 40);
     REQUIRE(t1.SS == 41);
-        
-    REQUIRE_FALSE(t1.HH == 22);
-    REQUIRE_FALSE(t1.MM == 45);
-    REQUIRE_FALSE(t1.SS == 48);
+
+    CHECK_FALSE(in.fail());
+
+    stringstream in2{"23:40:100"};
+    Time t2{};
+    in2 >> t2;
+
+    CHECK_FALSE(t1.HH == 22);
+    CHECK_FALSE(t1.MM == 45);
+    CHECK_FALSE(t1.SS == 48);
+
+    CHECK(in2.fail());
+
+
+
 
 }
 

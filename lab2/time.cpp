@@ -113,7 +113,6 @@ Time &operator+(Time &time, int sec)
             }
         }
     }
-
     return time;
 }
 
@@ -123,11 +122,12 @@ Time &operator++(Time &time)
     return time;
 }
 
-Time operator++(Time &time, int)    REQUIRE(is_am(t) == true);
+Time operator++(Time &time, int)    
 {
     time = time + 1;
     return time;
 }
+
 
 Time &operator-(Time &time, int sec)
 {
