@@ -7,33 +7,12 @@ using namespace std;
 
 bool is_valid(Time const time)
 {
-
-    if (time.HH > 23 || time.HH < 0)
-    {
-
-        return false;
-    }
-    else if (time.MM > 59 || time.MM < 0)
-    {
-
-        return false;
-    }
-    else if (time.SS > 59 || time.SS < 0)
-    {
-
-        return false;
-    }
-
-    return true;
+    return (!(time.HH > 23 || time.HH < 0 || time.MM > 59 || time.MM < 0 || time.SS > 59 || time.SS < 0 ));    
 }
 
 bool is_am(Time const &time)
 {
-    if (time.HH < 12)
-    {
-        return true;
-    }
-    return false;
+    return (time.HH < 12);
 }
 
 std::string to_string(Time const &time, bool regular_time)
@@ -80,11 +59,7 @@ std::string to_string(Time const &time, bool regular_time)
 
 bool operator==(Time const &time1, Time const &time2)
 {
-   if (time1.HH == time2.HH && time1.MM == time2.MM)
-    {
-        return (time1.SS == time2.SS);
-    }
-    return false;
+   return (time1.HH == time2.HH && time1.MM == time2.MM && time1.SS == time2.SS);
 }
 
 bool operator!=(Time const &time1, Time const &time2)
@@ -199,7 +174,7 @@ istream &operator>>(istream &is, Time &time)
     char ignore_colon;
     Time tmp{time};
     is >> tmp.HH >> ignore_colon >> tmp.MM >> ignore_colon >> tmp.SS;
-    
+
     if (!is_valid(tmp) || ignore_colon != ':')
     {
         is.setstate(ios::failbit);
