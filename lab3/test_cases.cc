@@ -13,11 +13,8 @@
 // This define lets Catch create the main test program
 // (Must be in only one place!)
 
-#define CATCH_CONFIG_MAIN
-#include "/home/phire844/TDDE18/lab2/catch.hpp"
 #include <iostream>
-#include "catch.hpp"
-#include "list.h"
+#include "List.h"
 #include <sstream>
 
 //=======================================================================
@@ -25,6 +22,8 @@
 //=======================================================================
 
 TEST_CASE( "Create an empty list" ) {
+    List l{};
+    
 }
 
 // It is your job to create new test cases and fully test your Sorted_List class
