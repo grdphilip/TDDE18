@@ -67,33 +67,33 @@ bool operator!=(Time const &time1, Time const &time2)
     return !(time1 == time2);
 }
 
-Time &operator+(Time &time, int sec)
+Time operator+(Time &time, int sec)
 {
+    Time added{time};
+    added.SS = time.SS + sec;
 
-    time.SS = time.SS + sec;
-
-    while (time.SS > 59)
+    while (added.SS > 59)
     {
-        time.MM += 1;
-        time.SS -= 60;
+        added.MM += 1;
+        added.SS -= 60;
 
-        while (time.MM > 59)
+        while (added.MM > 59)
         {
-            time.HH += 1;
-            time.MM -= 60;
+            added.HH += 1;
+            added.MM -= 60;
 
-            if (time.HH > 23)
+            if (added.HH > 23)
             {
-                time.HH -= 24;
+                added.HH -= 24;
             }
         }
     }
-    return time;
+    return added;
 }
 
 Time &operator++(Time &time)
 {
-    time + 1;
+    time = time + 1;
     return time;
 }
 
@@ -106,38 +106,39 @@ Time operator++(Time &time, int)
 }
 
 
-Time &operator-(Time &time, int sec)
+Time operator-(Time & time, int sec)
 {
-    time.SS = time.SS - sec;
+    Time subtracted{time};
+    subtracted.SS = time.SS - sec;
 
-    while (time.SS < 0)
+    while (subtracted.SS < 0)
     {
        
-        time.SS += 60;
-        time.MM -= 1;
+        subtracted.SS += 60;
+        subtracted.MM -= 1;
        
-        while (time.MM < 0)
-        {   time.MM += 60;
-            time.HH -= 1;
+        while (subtracted.MM < 0)
+        {   subtracted.MM += 60;
+            subtracted.HH -= 1;
             
-            if (time.HH < 0)
+            if (subtracted.HH < 0)
             {
-                time.HH += 24;
+                subtracted.HH += 24;
             }
         }
     }
-    return time;
+    return subtracted;
 }
 
 Time &operator--(Time &time)
 {
-    time - 1;
+    time = time - 1;
     return time;
 }
 
 Time operator--(Time &time, int sec)
 {
-    Time temp = time;
+    Time temp{time};
     time = time - 1;
     
     return temp;
