@@ -92,7 +92,7 @@ TEST_CASE("Operator ++x")
 TEST_CASE("Operator x++")
 {
     Time t1{12, 00, 00};
-    Time t2{12, 00, 01};
+    Time t2{12, 00, 00};
 
     CHECK(t1++ == t2);
     CHECK_FALSE(t1++ == t2 + 4);

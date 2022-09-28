@@ -124,8 +124,10 @@ Time &operator++(Time &time)
 
 Time operator++(Time &time, int)    
 {
+    Time temp = time;
     time = time + 1;
-    return time;
+    
+    return temp;
 }
 
 
