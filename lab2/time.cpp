@@ -80,9 +80,9 @@ std::string to_string(Time const &time, bool regular_time)
 
 bool operator==(Time const &time1, Time const &time2)
 {
-    while (time1.HH == time2.HH && time1.MM == time2.MM && time1.SS == time2.SS)
+   if (time1.HH == time2.HH && time1.MM == time2.MM)
     {
-        return true;
+        return (time1.SS == time2.SS);
     }
     return false;
 }
@@ -137,12 +137,14 @@ Time &operator-(Time &time, int sec)
 
     while (time.SS < 0)
     {
-        time.MM -= 1;
+       
         time.SS += 60;
+        time.MM -= 1;
+       
         while (time.MM < 0)
-        {
+        {   time.MM += 60;
             time.HH -= 1;
-            time.MM += 60;
+            
             if (time.HH < 0)
             {
                 time.HH += 24;
@@ -160,8 +162,10 @@ Time &operator--(Time &time)
 
 Time operator--(Time &time, int sec)
 {
-    time - 1;
-    return time;
+    Time temp = time;
+    time = time - 1;
+    
+    return temp;
 }
 
 bool operator>(Time const &time1, Time const &time2)
@@ -195,6 +199,7 @@ istream &operator>>(istream &is, Time &time)
     char ignore_colon;
     Time tmp{time};
     is >> tmp.HH >> ignore_colon >> tmp.MM >> ignore_colon >> tmp.SS;
+    
     if (!is_valid(tmp) || ignore_colon != ':')
     {
         is.setstate(ios::failbit);

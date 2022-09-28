@@ -6,7 +6,7 @@
 using namespace std;
 
 // Testa normalfall, hörnfall och saker som inte ska funka
-// Require stoppar programmet ifall testet failar, borde användas på vitala grejer
+// Require stoppar test caset ifall testet failar, borde användas på vitala grejer
 
 TEST_CASE("Is valid")
 {
@@ -74,9 +74,10 @@ TEST_CASE("Operator +")
     Time t3{00, 00, 00};
     Time t4{01, 00, 00};
 
-    REQUIRE(t1 + 3601 == t4);
+    REQUIRE(t1 + 262801 == t4);
     REQUIRE(t2 + 1 == t3);
     REQUIRE_FALSE(t1 + 3 == t3);
+
 
 }
 
@@ -101,9 +102,11 @@ TEST_CASE("Operator x++")
 TEST_CASE("Operator -")
 {
     Time t1{00, 00, 00};
+    Time t{00, 00, 00};
     Time t2{23, 59, 59};
 
-    CHECK(t1 - 1 == t2);
+    REQUIRE(t1 - 1 == t2);
+    REQUIRE(t - 259201 == t2);
     CHECK_FALSE(t1 - 5 == t2);
 }
 
@@ -119,7 +122,7 @@ TEST_CASE("Operator --x")
 TEST_CASE("Operator x--")
 {
     Time t1{00, 00, 00};
-    Time t2{23, 59, 59};
+    Time t2{00, 00, 00};
 
     CHECK(t1-- == t2);
     CHECK_FALSE(--t1 == t2-2342);
@@ -204,6 +207,19 @@ TEST_CASE("Operator >>") {
     CHECK_FALSE(t1.SS == 48);
 
     CHECK(in2.fail());
+
+     stringstream in3{"2340100"};
+     Time t3{};
+     in3 >> t3;
+     CHECK(in3.fail());
+
+      stringstream in4{"23:40&00"};
+     Time t4{};
+     in4 >> t4;
+     CHECK(in4.fail());
+
+
+
 
 
 
