@@ -12,18 +12,20 @@
 
 // This define lets Catch create the main test program
 // (Must be in only one place!)
-
-#include <iostream>
+#include "catch.hpp"
 #include "List.h"
-#include <sstream>
+using namespace std;
 
 //=======================================================================
 // Test cases
 //=======================================================================
 
-TEST_CASE( "Create an empty list" ) {
+TEST_CASE("Create an empty list")
+{
     List l{};
-    
+
+    REQUIRE(l.is_empty() == true);
+    REQUIRE(l.size() == 0);
 }
 
 // It is your job to create new test cases and fully test your Sorted_List class
