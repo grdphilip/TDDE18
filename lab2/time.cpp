@@ -1,13 +1,11 @@
-#include <iostream>
+
 #include "time.h"
-#include <sstream>
-#include <iomanip>
 
 using namespace std;
 
 bool is_valid(Time const time)
 {
-    return (!(time.HH > 23 || time.HH < 0 || time.MM > 59 || time.MM < 0 || time.SS > 59 || time.SS < 0 ));    
+    return (!(time.HH > 23 || time.HH < 0 || time.MM > 59 || time.MM < 0 || time.SS > 59 || time.SS < 0));
 }
 
 bool is_am(Time const &time)
@@ -59,7 +57,7 @@ std::string to_string(Time const &time, bool regular_time)
 
 bool operator==(Time const &time1, Time const &time2)
 {
-   return (time1.HH == time2.HH && time1.MM == time2.MM && time1.SS == time2.SS);
+    return (time1.HH == time2.HH && time1.MM == time2.MM && time1.SS == time2.SS);
 }
 
 bool operator!=(Time const &time1, Time const &time2)
@@ -67,7 +65,7 @@ bool operator!=(Time const &time1, Time const &time2)
     return !(time1 == time2);
 }
 
-Time operator+(Time &time, int sec)
+Time operator+(Time const &time, int sec)
 {
     Time added{time};
     added.SS = time.SS + sec;
@@ -97,30 +95,30 @@ Time &operator++(Time &time)
     return time;
 }
 
-Time operator++(Time &time, int)    
+Time operator++(Time &time, int)
 {
     Time temp = time;
     time = time + 1;
-    
+
     return temp;
 }
 
-
-Time operator-(Time & time, int sec)
+Time operator-(Time const &time, int sec)
 {
     Time subtracted{time};
     subtracted.SS = time.SS - sec;
 
     while (subtracted.SS < 0)
     {
-       
+
         subtracted.SS += 60;
         subtracted.MM -= 1;
-       
+
         while (subtracted.MM < 0)
-        {   subtracted.MM += 60;
+        {
+            subtracted.MM += 60;
             subtracted.HH -= 1;
-            
+
             if (subtracted.HH < 0)
             {
                 subtracted.HH += 24;
@@ -140,7 +138,7 @@ Time operator--(Time &time, int sec)
 {
     Time temp{time};
     time = time - 1;
-    
+
     return temp;
 }
 
@@ -151,7 +149,7 @@ bool operator>(Time const &time1, Time const &time2)
 
 bool operator<(Time const &time1, Time const &time2)
 {
-   return(time2 > time1);
+    return (time2 > time1);
 }
 
 bool operator>=(Time const &time1, Time const &time2)
