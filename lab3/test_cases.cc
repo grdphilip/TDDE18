@@ -28,4 +28,11 @@ TEST_CASE("Create an empty list")
     REQUIRE(l.size() == 0);
 }
 
+TEST_CASE("Insert 1 element")
+ { 
+    List l{};
+    l.insert(5);
+
+    CHECK_FALSE(l.is_empty());
+ }
 // It is your job to create new test cases and fully test your Sorted_List class

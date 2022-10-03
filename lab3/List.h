@@ -4,22 +4,29 @@
 #include <sstream>
 #include <iomanip>
 
-class List {
+/*
+Class
+@param
+*/
+
+class List
+{
 
 private:
-
-struct Node {
-    int value{};
-    Node* next{};
-};
-Node* head{};
-Node* tail{};
     
+    struct Node
+    {
+        int value{};
+        Node* next{};
+    };
+
+    Node* head{};
+    Node* tail{};
 
 public:
     List();
-
-    void insert();
+    
+    void insert(int value);
     bool is_empty() const;
     int size() const;
 };

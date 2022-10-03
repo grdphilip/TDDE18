@@ -10,7 +10,7 @@ struct Time
     int SS;
 };
 
-bool is_valid(Time time);
+bool is_valid(Time const time);
 bool is_am(Time const &time);
 std::string to_string(Time const &time, bool regular_time);
 bool operator==(Time const &time1, Time const &time2);

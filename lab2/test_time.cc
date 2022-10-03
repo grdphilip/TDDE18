@@ -208,7 +208,7 @@ TEST_CASE("Operator >>") {
 
     CHECK(in2.fail());
 
-     stringstream in3{"2340100"};
+     stringstream in3{"22-05:10"};
      Time t3{};
      in3 >> t3;
      CHECK(in3.fail());

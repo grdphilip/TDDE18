@@ -2,22 +2,30 @@
 #include "List.h"
 
 List::List()
-: head{nullptr}, tail{nullptr}
+    : head{nullptr}, tail{nullptr}
 {
 
 }
 
+void List::insert(int value)
+{
 
-
-bool List::is_empty() const  {
-
-return true;
+    if (is_empty())
+    {
+        //Skapar en ny node och initierar istället för att kalla på en konstruktor
+        head = new Node{value, nullptr};
+        tail = head;
+        return;
+    }
 }
 
-int List::size() const {
+bool List::is_empty() const
+{
+    return head == nullptr;
+
+}
+
+int List::size() const
+{
     return 0;
 }
-
-
-
-
