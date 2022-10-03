@@ -8,7 +8,7 @@ List::List()
 {
 }
 
-void List::insert(int value)
+void List::insert_last(int value)
 {
 
     Node *tmp = new Node{value, nullptr};
@@ -18,15 +18,57 @@ void List::insert(int value)
         // Skapar en ny node och initierar istället för att kalla på en konstruktor
         head = tmp;
         tail = head;
-
         return;
     }
     else
-    {
-        tail->next = tmp;
-        tail = tail->next;
-    }
+        insertion_sort(tmp);
     return;
+}
+
+void List::insertion_sort(Node *tmp)
+{
+    
+    Node* dummy = new Node{};
+    
+    if (head->value > tmp->value)
+    {
+        head->next = dummy;
+        tmp->next = head;
+        head->next = dummy->next;
+        head = tmp;
+    }
+    else if(tmp->next != nullptr){
+
+    }
+    
+   // tmp->next = head->next;
+   // head->next = tmp;
+    
+    /*
+        Node *sort_tmp = new Node{value, nullptr};
+        sort_tmp->next = head->next;
+        head->next = sort_tmp;
+
+        if (sort_tmp->value < head->value)
+        {
+            Node* dummy_ptr = new Node{};
+            dummy_ptr->next = sort_tmp->next;
+
+            head->next = dummy_ptr;
+
+            sort_tmp->next = head;
+
+            head->next = dummy_ptr->next;
+
+            head = sort_tmp;
+
+        }
+        else
+        head = head->next;
+        insertion_sort(head->value);
+        */
+       return;
+  
 }
 
 void List::remove()
@@ -42,15 +84,23 @@ void List::get_index_at(int index)
     Node *tmp = new Node{};
     tmp = head;
 
-    for (int i = 0; i <= index-1; i++) 
-    {  
+    for (int i = 0; i <= index - 1; i++)
+    {
         tmp = tmp->next;
     }
     cout << tmp->value;
 }
 
-void List::print(Node* head) {
-    cout << head->value;
+void List::print()
+{
+    Node *tmp = new Node{};
+    tmp = head;
+
+    while (tmp)
+    {
+        cout << "--> " << tmp->value;
+        tmp = tmp->next;
+    }
 }
 
 bool List::is_empty() const
@@ -60,7 +110,14 @@ bool List::is_empty() const
 
 int List::size() const
 {
-    return 0;
+    int length = 0;
+    Node *tmp = new Node{};
+    tmp = head;
+
+    while (tmp)
+    {
+        tmp = tmp->next;
+        length++;
+    }
+    return length;
 }
-
-
