@@ -22,17 +22,20 @@ private:
 
     Node* head{};
     Node* tail{};
+    
 
 public:
     List();
     int length{0};
     
-    void insert(int value);
+    void insert_last(int value);
+    void insertion_sort(Node* tmp);
     void remove();
     void get_index_at(int index);
-    void print(Node* head);
+    void print();
     bool is_empty() const;
     int size() const;
+    
    
 };
 

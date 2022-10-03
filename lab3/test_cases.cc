@@ -31,13 +31,26 @@ TEST_CASE("Create an empty list")
 TEST_CASE("Insert 1 element")
  { 
     List l{};
-    l.insert(5);
-    l.insert(7);
-    l.insert(9);
-    l.insert(11);
+    l.insert_last(3);
+    l.print(); 
+    cout << endl;
+    l.insert_last(2);
+    l.print(); 
+    cout << endl;
+    l.insert_last(4);
+    l.print(); 
+    cout << endl;
+    l.insert_last(12);
+    l.print(); 
+    cout << endl;
+    l.insert_last(9);
+    l.print(); 
+    cout << endl;
+    l.insert_last(2);
     
-    l.get_index_at(2);
     
+    l.print(); 
+    cout << endl; 
 
     CHECK(l.is_empty());
  }
