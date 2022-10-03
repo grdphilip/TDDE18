@@ -41,16 +41,14 @@ std::string to_string(Time const &time, bool regular_time)
     out << ":" << setw(2) << time.MM << ":" << setw(2) << time.SS;
     if (regular_time)
     {
-        out << "[";
         if (is_am(time))
         {
-            out << "am";
+            out << " am";
         }
         else
         {
-            out << "pm";
+            out << " pm";
         }
-        out << "]";
     }
     return out.str();
 }
@@ -137,14 +135,14 @@ Time &operator--(Time &time)
 Time operator--(Time &time, int sec)
 {
     Time temp{time};
-    time = time - 1;
+    time = time - sec;
 
     return temp;
 }
 
 bool operator>(Time const &time1, Time const &time2)
 {
-    return (time1.HH > time2.HH || time1.HH == time2.HH && time1.MM > time2.MM || time1.MM == time2.MM && time1.SS > time2.SS);
+    return ((time1.HH > time2.HH) || (time1.HH == time2.HH && time1.MM > time2.MM) || (time1.MM == time2.MM && time1.SS > time2.SS));
 }
 
 bool operator<(Time const &time1, Time const &time2)
@@ -170,11 +168,11 @@ std::ostream &operator<<(std::ostream &os, Time const &time)
 
 istream &operator>>(istream &is, Time &time)
 {
-    char ignore_colon;
+    char ignore_colon, ignore_colon2;
     Time tmp{time};
-    is >> tmp.HH >> ignore_colon >> tmp.MM >> ignore_colon >> tmp.SS;
+    is >> tmp.HH >> ignore_colon >> tmp.MM >> ignore_colon2 >> tmp.SS;
 
-    if (!is_valid(tmp) || ignore_colon != ':')
+    if (!is_valid(tmp) || ignore_colon != ':' || ignore_colon2 != ':')
     {
         is.setstate(ios::failbit);
     }

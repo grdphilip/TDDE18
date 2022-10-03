@@ -77,7 +77,8 @@
         "algorithm": "cpp",
         "functional": "cpp",
         "iterator": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "valueobject": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

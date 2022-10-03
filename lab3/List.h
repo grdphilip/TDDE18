@@ -14,6 +14,7 @@ class List
 
 private:
     
+    
     struct Node
     {
         int value{};
@@ -25,6 +26,7 @@ private:
 
 public:
     List();
+    int length{0};
     
     void insert(int value);
     bool is_empty() const;

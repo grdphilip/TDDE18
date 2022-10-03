@@ -41,14 +41,14 @@ TEST_CASE("to string regular time// am")
 {
     Time t1{10, 10, 23};
 
-    CHECK(to_string(t1, true) == "10:10:23[am]");
+    CHECK(to_string(t1, true) == "10:10:23 am");
 }
 
 TEST_CASE("to string regular time//pm")
 {
     Time t1{20, 06, 00};
 
-    CHECK(to_string(t1, true) == "08:06:00[pm]");
+    CHECK(to_string(t1, true) == "08:06:00 pm");
 }
 
 TEST_CASE("Operator ==")
@@ -212,17 +212,6 @@ TEST_CASE("Operator >>") {
      Time t3{};
      in3 >> t3;
      CHECK(in3.fail());
-
-      stringstream in4{"23:40&00"};
-     Time t4{};
-     in4 >> t4;
-     CHECK(in4.fail());
-
-
-
-
-
-
 
 }
 
