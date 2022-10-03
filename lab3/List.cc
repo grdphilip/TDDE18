@@ -9,21 +9,48 @@ List::List()
 }
 
 void List::insert(int value)
+{
 
+    Node *tmp = new Node{value, nullptr};
 
     if (is_empty())
     {
         // Skapar en ny node och initierar istället för att kalla på en konstruktor
-        head = new Node{value, nullptr};
+        head = tmp;
         tail = head;
-        length++;
+
         return;
     }
-
-    head = new Node{value, nullptr};
-    length++;
-    cout << length;
+    else
+    {
+        tail->next = tmp;
+        tail = tail->next;
+    }
     return;
+}
+
+void List::remove()
+{
+    Node *tmp = new Node{};
+    tmp = head;
+    head = head->next;
+    delete tmp;
+}
+
+void List::get_index_at(int index)
+{
+    Node *tmp = new Node{};
+    tmp = head;
+
+    for (int i = 0; i <= index-1; i++) 
+    {  
+        tmp = tmp->next;
+    }
+    cout << tmp->value;
+}
+
+void List::print(Node* head) {
+    cout << head->value;
 }
 
 bool List::is_empty() const
@@ -35,3 +62,5 @@ int List::size() const
 {
     return 0;
 }
+
+

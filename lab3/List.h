@@ -12,8 +12,7 @@ Class
 class List
 {
 
-private:
-    
+private: 
     
     struct Node
     {
@@ -29,8 +28,12 @@ public:
     int length{0};
     
     void insert(int value);
+    void remove();
+    void get_index_at(int index);
+    void print(Node* head);
     bool is_empty() const;
     int size() const;
+   
 };
 
 #endif
