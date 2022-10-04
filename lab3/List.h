@@ -28,8 +28,8 @@ public:
     List();
     int length{0};
     
-    void insert_last(int value);
-    void insertion_sort(Node* tmp);
+    void insert(int value);
+    void sorted_insert(Node* tmp_sort);
     void remove();
     void get_index_at(int index);
     void print();

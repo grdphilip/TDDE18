@@ -8,7 +8,7 @@ List::List()
 {
 }
 
-void List::insert_last(int value)
+void List::insert(int value)
 {
 
     Node *tmp = new Node{value, nullptr};
@@ -20,68 +20,51 @@ void List::insert_last(int value)
         tail = head;
         return;
     }
+    else if (head->value > tmp->value)
+    {
+        tmp->next = head;
+        tail = head;
+        head = tmp;
+    }
     else
-        insertion_sort(tmp);
+        sorted_insert(tmp);
     return;
 }
 
-void List::insertion_sort(Node *tmp)
+void List::sorted_insert(Node *tmp_sort)
 {
-    
-    Node* dummy = new Node{};
-    
-    if (head->value > tmp->value)
+    Node *iterator;
+    iterator = head;
+    Node *dummy;
+    while (iterator->next != nullptr)
     {
-        head->next = dummy;
-        tmp->next = head;
-        head->next = dummy->next;
-        head = tmp;
-    }
-    else if(tmp->next != nullptr){
-
-    }
-    
-   // tmp->next = head->next;
-   // head->next = tmp;
-    
-    /*
-        Node *sort_tmp = new Node{value, nullptr};
-        sort_tmp->next = head->next;
-        head->next = sort_tmp;
-
-        if (sort_tmp->value < head->value)
+        if (tmp_sort->value > iterator->value)
         {
-            Node* dummy_ptr = new Node{};
-            dummy_ptr->next = sort_tmp->next;
-
-            head->next = dummy_ptr;
-
-            sort_tmp->next = head;
-
-            head->next = dummy_ptr->next;
-
-            head = sort_tmp;
-
+            if (tmp_sort->value < iterator->next->value)
+            {
+                dummy->next = iterator->next;
+                iterator->next = tmp_sort;
+                tmp_sort->next = dummy->next;
+                return;
+            }
+            iterator = iterator->next;
         }
-        else
-        head = head->next;
-        insertion_sort(head->value);
-        */
-       return;
-  
+    }
+    tail->next = tmp_sort;
+    tail = tmp_sort;
+    return;
 }
 
 void List::remove()
 {
-    Node *tmp = new Node{};
+    Node *tmp;
     tmp = head;
     head = head->next;
-    delete tmp;
 }
 
 void List::get_index_at(int index)
 {
-    Node *tmp = new Node{};
+    Node *tmp;
     tmp = head;
 
     for (int i = 0; i <= index - 1; i++)
@@ -93,7 +76,7 @@ void List::get_index_at(int index)
 
 void List::print()
 {
-    Node *tmp = new Node{};
+    Node *tmp;
     tmp = head;
 
     while (tmp)
@@ -111,7 +94,7 @@ bool List::is_empty() const
 int List::size() const
 {
     int length = 0;
-    Node *tmp = new Node{};
+    Node *tmp;
     tmp = head;
 
     while (tmp)
@@ -119,5 +102,6 @@ int List::size() const
         tmp = tmp->next;
         length++;
     }
+
     return length;
 }
