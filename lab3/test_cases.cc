@@ -28,7 +28,7 @@ TEST_CASE("Create an empty list")
     REQUIRE(l.size() == 0);
 }
 
-TEST_CASE("Insert 1 element")
+TEST_CASE("Insert 1-9 elements")
 {
     List l{};
     l.insert(2);
@@ -58,9 +58,44 @@ TEST_CASE("Insert 1 element")
     l.insert(6);
     l.print();
     cout << endl;
+    l.print();
+    cout << endl;
 
     CHECK(l.size() == 9);
 
     CHECK_FALSE(l.is_empty());
 }
+
+TEST_CASE("Check size")
+{
+    List l{};
+    l.insert(2);
+    l.insert(3);
+    l.insert(5);
+    l.insert(7);
+    l.insert(9);
+    l.insert(4);
+    l.insert(8);
+    l.insert(1);
+    l.insert(6);
+
+    CHECK(l.size() == 9);
+    CHECK_FALSE(l.size() == 2000);
+}
+
+TEST_CASE("Remove an item")
+{
+    List l{};
+    l.insert(2);
+    l.insert(3);
+    l.insert(5);
+    l.insert(7);
+    l.insert(9);
+    l.insert(11);
+    l.print();
+    cout << endl;
+    l.remove(3);
+    l.print();
+}
+
 // It is your job to create new test cases and fully test your Sorted_List class

@@ -8,6 +8,23 @@ List::List()
 {
 }
 
+List::~List()
+{
+ 
+    Node *tmp{nullptr};
+    tmp = head;
+
+   for (; head; tmp = head)
+   {
+     head = head->next;
+     delete tmp;
+   }  
+  
+   if (is_empty()) {
+    cout << "Yes";
+   }
+}
+
 void List::insert(int value)
 {
 
@@ -33,18 +50,19 @@ void List::insert(int value)
 
 void List::sorted_insert(Node *tmp_sort)
 {
-    Node *iterator;
+    Node *iterator{nullptr};
     iterator = head;
-    Node *dummy;
+
     while (iterator->next != nullptr)
     {
         if (tmp_sort->value > iterator->value)
         {
             if (tmp_sort->value < iterator->next->value)
             {
-                dummy->next = iterator->next;
+                Node *dummy{nullptr};
+                dummy = iterator->next;
                 iterator->next = tmp_sort;
-                tmp_sort->next = dummy->next;
+                tmp_sort->next = dummy;
                 return;
             }
             iterator = iterator->next;
@@ -55,14 +73,46 @@ void List::sorted_insert(Node *tmp_sort)
     return;
 }
 
-void List::remove()
+void List::remove(int index)
 {
-    Node *tmp;
+
+    Node *tmp, *prev;
     tmp = head;
-    head = head->next;
+
+    if (index == 0)
+    {
+        head = head->next;
+        delete (tmp);
+    }
+    /*
+       if (tmp->next != nullptr)
+       {
+           for (int i{0}; i < index - 1; i++)
+           {
+              return;
+           }
+       }
+    */
+    /*
+        if (value == prev->value) {
+            prev = iterator;
+        }
+
+        while (iterator->next != nullptr)
+        {
+            prev = iterator;
+            iterator = iterator->next;
+
+            if (iterator->value == value)
+            {
+                prev->next = iterator->next;
+            }
+        }
+
+        */
 }
 
-void List::get_index_at(int index)
+int List::get_index_at(int index)
 {
     Node *tmp;
     tmp = head;
@@ -71,7 +121,7 @@ void List::get_index_at(int index)
     {
         tmp = tmp->next;
     }
-    cout << tmp->value;
+    return tmp->value;
 }
 
 void List::print()
