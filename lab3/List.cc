@@ -10,19 +10,15 @@ List::List()
 
 List::~List()
 {
- 
+
     Node *tmp{nullptr};
     tmp = head;
 
-   for (; head; tmp = head)
-   {
-     head = head->next;
-     delete tmp;
-   }  
-  
-   if (is_empty()) {
-    cout << "Yes";
-   }
+    for (; head; tmp = head)
+    {
+        head = head->next;
+        delete tmp;
+    }
 }
 
 void List::insert(int value)
@@ -73,43 +69,40 @@ void List::sorted_insert(Node *tmp_sort)
     return;
 }
 
-void List::remove(int index)
+void List::remove(int value)
 {
 
-    Node *tmp, *prev;
-    tmp = head;
+    Node *iterator, *prev;
+    iterator = head;
+    prev = head;
 
-    if (index == 0)
+    if (value == prev->value)
     {
-        head = head->next;
-        delete (tmp);
+        prev = iterator;
     }
-    /*
-       if (tmp->next != nullptr)
-       {
-           for (int i{0}; i < index - 1; i++)
-           {
-              return;
-           }
-       }
-    */
-    /*
-        if (value == prev->value) {
-            prev = iterator;
-        }
 
-        while (iterator->next != nullptr)
+    while (iterator->next != nullptr)
+    {
+        prev = iterator;
+        iterator = iterator->next;
+
+        if (iterator->value == value)
         {
-            prev = iterator;
-            iterator = iterator->next;
-
-            if (iterator->value == value)
-            {
-                prev->next = iterator->next;
-            }
+            prev->next = iterator->next;
+            
         }
+    }
 
-        */
+    /*
+
+
+          if (value == 0)
+     {
+         head = head->next;
+         delete (tmp);
+     }
+
+         */
 }
 
 int List::get_index_at(int index)

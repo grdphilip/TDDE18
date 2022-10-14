@@ -32,34 +32,23 @@ TEST_CASE("Insert 1-9 elements")
 {
     List l{};
     l.insert(2);
-    l.print();
-    cout << endl;
+
     l.insert(3);
-    l.print();
-    cout << endl;
+   
     l.insert(5);
-    l.print();
-    cout << endl;
+   
     l.insert(7);
-    l.print();
-    cout << endl;
+   
     l.insert(9);
-    l.print();
-    cout << endl;
+    
     l.insert(4);
-    l.print();
-    cout << endl;
+    
     l.insert(8);
-    l.print();
-    cout << endl;
+  
     l.insert(1);
-    l.print();
-    cout << endl;
+  
     l.insert(6);
-    l.print();
-    cout << endl;
-    l.print();
-    cout << endl;
+
 
     CHECK(l.size() == 9);
 
@@ -94,7 +83,7 @@ TEST_CASE("Remove an item")
     l.insert(11);
     l.print();
     cout << endl;
-    l.remove(3);
+    l.remove(5);
     l.print();
 }
 

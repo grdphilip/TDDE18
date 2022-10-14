@@ -36,7 +36,7 @@ public:
 
     void insert(int value);
     void sorted_insert(Node *tmp_sort);
-    void remove(int index);
+    void remove(int value);
     int get_index_at(int index);
     void print();
     bool is_empty() const;
