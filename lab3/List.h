@@ -24,23 +24,20 @@ private:
 
 public:
     List();
-    List(List const &other)
-    {
-        Node* tmp; 
-        tmp = head->next;
-        
-    }
+    List(const List &orgObj);
+    List(List &&orgObj);
     ~List();
-    
-    int length{0};
 
-    void insert(int value);
+    List &operator=(const List &orgObj);
+    List &operator=(List &&orgObj);
+    void insert(int const &value);
     void sorted_insert(Node *tmp_sort);
-    void remove(int value);
-    int get_index_at(int index);
+    void remove(int const &value);
+    int const &get_index_at(int const &index);
     void print();
-    bool is_empty() const;
-    int size() const;
+    void print_list(Node *tmp);
+    bool const is_empty();
+    int const size();
 };
 
 #endif
