@@ -2,23 +2,18 @@
 #include "catch.hpp"
 #include "time.h"
 
-
 using namespace std;
-
-// Testa normalfall, hörnfall och saker som inte ska funka
-// Require stoppar test caset ifall testet failar, borde användas på vitala grejer
 
 TEST_CASE("Is valid")
 {
 
     Time t{00, 00, 00};
     REQUIRE(is_valid(t) == true);
-     
-      Time t1{25, 00, 00};
-      Time t2{135, 00, 00};
+
+    Time t1{25, 00, 00};
+    Time t2{135, 00, 00};
     REQUIRE_FALSE(is_valid(t1) == true);
     REQUIRE_FALSE(is_valid(t2) == true);
-
 }
 
 TEST_CASE("Is am")
@@ -34,7 +29,6 @@ TEST_CASE("to string 24 hour time")
 {
     Time t1{22, 23, 23};
     CHECK(to_string(t1, false) == "22:23:23");
-
 }
 
 TEST_CASE("to string regular time// am")
@@ -77,8 +71,6 @@ TEST_CASE("Operator +")
     REQUIRE(t1 + 262801 == t4);
     REQUIRE(t2 + 1 == t3);
     REQUIRE_FALSE(t1 + 3 == t3);
-
-
 }
 
 TEST_CASE("Operator ++x")
@@ -87,7 +79,7 @@ TEST_CASE("Operator ++x")
     Time t2{00, 00, 00};
 
     CHECK(++t1 == t2);
-    CHECK_FALSE(++t1 == t2+4);
+    CHECK_FALSE(++t1 == t2 + 4);
 }
 
 TEST_CASE("Operator x++")
@@ -116,7 +108,7 @@ TEST_CASE("Operator --x")
     Time t2{23, 59, 59};
 
     CHECK(--t1 == t2);
-    CHECK_FALSE(--t1 == t2-234234);
+    CHECK_FALSE(--t1 == t2 - 234234);
 }
 
 TEST_CASE("Operator x--")
@@ -125,7 +117,7 @@ TEST_CASE("Operator x--")
     Time t2{00, 00, 00};
 
     CHECK(t1-- == t2);
-    CHECK_FALSE(--t1 == t2-2342);
+    CHECK_FALSE(--t1 == t2 - 2342);
 }
 
 TEST_CASE("Operator >")
@@ -153,7 +145,6 @@ TEST_CASE("Operator >=")
 
     CHECK(t1 >= t1);
     CHECK_FALSE(t2 >= t1);
-    
 
     t1 = {11, 11, 11};
     t2 = {11, 11, 11};
@@ -183,10 +174,10 @@ TEST_CASE("Operator <<")
     out << t1;
 
     CHECK(out.str() == to_string(t1, 0));
-
 }
 
-TEST_CASE("Operator >>") {
+TEST_CASE("Operator >>")
+{
 
     Time t1{};
     stringstream in{"23:40:41"};
@@ -207,12 +198,10 @@ TEST_CASE("Operator >>") {
     CHECK_FALSE(t1.SS == 48);
 
     CHECK(in2.fail());
-
-     stringstream in3{"22-05:10"};
-     Time t3{};
-     in3 >> t3;
-     CHECK(in3.fail());
-
+    
+         stringstream in3{"22-05:10"};
+         Time t3{};
+         in3 >> t3;
+         CHECK(in3.fail());
+    
 }
-
-

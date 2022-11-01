@@ -3,12 +3,12 @@
 
 using namespace std;
 
-bool is_valid(Time const time)
+bool const is_valid(Time const &time)
 {
     return (!(time.HH > 23 || time.HH < 0 || time.MM > 59 || time.MM < 0 || time.SS > 59 || time.SS < 0));
 }
 
-bool is_am(Time const &time)
+bool const is_am(Time const &time)
 {
     return (time.HH < 12);
 }
