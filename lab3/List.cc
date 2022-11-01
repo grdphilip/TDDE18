@@ -7,28 +7,82 @@ List::List()
     : head{nullptr}, tail{nullptr}
 {
 }
-
-List::~List()
+List::List(const List &orgObj)
 {
-
-    Node *tmp{nullptr};
-    tmp = head;
-
-    for (; head; tmp = head)
+    if (orgObj.head == nullptr)
     {
-        head = head->next;
-        delete tmp;
+        head == nullptr;
+    }
+    else
+    {
+        Node *tmp{};
+        tmp = orgObj.head;
+
+        while (tmp->next != nullptr)
+        {
+            Node *copy = new Node{tmp->value, nullptr};
+            if (is_empty())
+            {
+                head = copy;
+                tail = copy;
+                head->next = tail;
+            }
+
+            tail->next = copy;
+            tail = copy;
+
+            tmp = tmp->next;
+        }
+        Node *copy = new Node{tmp->value, nullptr};
+        tail->next = copy;
+        tail = copy;
     }
 }
 
-void List::insert(int value)
+List::List(List &&orgObj)
 {
+    if (orgObj.head == nullptr)
+    {
+        head == nullptr;
+    }
+    else if (orgObj.head->next != nullptr)
+    {
+        head = orgObj.head;
+        orgObj.head = nullptr;
+        delete orgObj.head;
+    }
+}
 
+List &List::operator=(const List &orgObj)
+{
+    head = orgObj.head;
+    tail = orgObj.tail;
+    return *this;
+}
+
+List &List::operator=(List &&orgObj)
+{
+    swap(head, orgObj.head);
+    swap(tail, orgObj.tail);
+    return *this;
+}
+
+List::~List()
+{
+    while (!is_empty())
+    {
+        Node *tmp = head->next;
+        delete head;
+        head = tmp;
+    }
+}
+
+void List::insert(int const &value)
+{
     Node *tmp = new Node{value, nullptr};
 
     if (is_empty())
     {
-        // Skapar en ny node och initierar istället för att kalla på en konstruktor
         head = tmp;
         tail = head;
         return;
@@ -69,43 +123,25 @@ void List::sorted_insert(Node *tmp_sort)
     return;
 }
 
-void List::remove(int value)
+void List::remove(int const &value)
 {
-
-    Node *iterator, *prev;
-    iterator = head;
-    prev = head;
-
-    if (value == prev->value)
+    Node *tmp{nullptr}, *dummy{nullptr};
+    tmp = head;
+    while (tmp->next != nullptr)
     {
-        prev = iterator;
-    }
-
-    while (iterator->next != nullptr)
-    {
-        prev = iterator;
-        iterator = iterator->next;
-
-        if (iterator->value == value)
+        if (tmp->next->value == value)
         {
-            prev->next = iterator->next;
-            
+            dummy = tmp->next;
+            tmp->next = dummy->next;
+            dummy->next = nullptr;
+            delete dummy;
+            return;
         }
+        tmp = tmp->next;
     }
-
-    /*
-
-
-          if (value == 0)
-     {
-         head = head->next;
-         delete (tmp);
-     }
-
-         */
 }
 
-int List::get_index_at(int index)
+int const &List::get_index_at(int const &index)
 {
     Node *tmp;
     tmp = head;
@@ -122,21 +158,27 @@ void List::print()
     Node *tmp;
     tmp = head;
 
-    while (tmp)
+    print_list(tmp);
+}
+
+void List::print_list(Node *tmp)
+{
+    if (tmp != nullptr)
     {
-        cout << "--> " << tmp->value;
-        tmp = tmp->next;
+        cout << " -> " << tmp->value;
+        print_list(tmp->next);
     }
 }
 
-bool List::is_empty() const
+bool const List::is_empty()
 {
     return head == nullptr;
 }
 
-int List::size() const
+int const List::size()
 {
-    int length = 0;
+
+    int length{0};
     Node *tmp;
     tmp = head;
 
