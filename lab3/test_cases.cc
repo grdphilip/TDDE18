@@ -125,10 +125,14 @@ TEST_CASE("Test copy =operator")
     l.insert(4);
     l.insert(5);
     l.insert(2);
-    List copy = l;
+    List copy{};
+    copy.insert(2);
+    copy.insert(4);
+    copy.insert(3);
+    copy.remove(3);
     REQUIRE(l.size() == 5);
-    REQUIRE(copy.size() == 5);
-
+    REQUIRE(copy.size() == 2);
+    copy = l;
     l.insert(7);
 
     REQUIRE(l.size() == 6);
