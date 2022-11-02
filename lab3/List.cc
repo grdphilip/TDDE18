@@ -56,7 +56,10 @@ List::List(List &&orgObj)
 List &List::operator=(const List &orgObj)
 {
     List tmp{orgObj};
-    swap(head, tmp.head);
+    Node *dummy{nullptr};
+    dummy = head;
+    head = tmp.head;
+    tmp.head = dummy;
     return *this;
 }
 
