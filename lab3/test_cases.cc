@@ -125,13 +125,17 @@ TEST_CASE("Test copy =operator")
     l.insert(4);
     l.insert(5);
     l.insert(2);
-    List copy = l;
+    List copy{};
+    copy.insert(2);
+    copy.insert(4);
+    copy.insert(3);
+    copy.remove(3);
     REQUIRE(l.size() == 5);
-    REQUIRE(copy.size() == 5);
-
+    REQUIRE(copy.size() == 2);
+    copy = l;
     l.insert(7);
-
-    REQUIRE(l.size() == 6);
+    l.remove(2);
+    REQUIRE(l.size() == 5);
     REQUIRE(copy.size() == 5);
 }
 
@@ -142,8 +146,11 @@ TEST_CASE("Move a list")
     l.insert(4);
     l.insert(3);
     l.insert(1);
-    List p = move(l);
-
+    List p{};
+    p.insert(2);
+    p.insert(5);
+    p.insert(3);
+    p = move(l);
     REQUIRE(l.is_empty() == true);
     REQUIRE(p.size() == 4);
     REQUIRE_FALSE(p.size() == 5);
