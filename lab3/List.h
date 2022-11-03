@@ -33,6 +33,7 @@ public:
     void insert(int const &value);
     void sorted_insert(Node *tmp_sort);
     void remove(int const &value);
+    void empty_list();
     int const &get_index_at(int const &index);
     void print();
     void print_list(Node *tmp);

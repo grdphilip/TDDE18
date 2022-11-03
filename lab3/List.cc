@@ -65,6 +65,7 @@ List &List::operator=(const List &orgObj)
 
 List &List::operator=(List &&orgObj)
 {
+    empty_list();
     head = orgObj.head;
     orgObj.head = nullptr;
     delete orgObj.head;
@@ -73,12 +74,7 @@ List &List::operator=(List &&orgObj)
 
 List::~List()
 {
-    while (!is_empty())
-    {
-        Node *tmp = head->next;
-        delete head;
-        head = tmp;
-    }
+    empty_list();
 }
 
 void List::insert(int const &value)
@@ -142,6 +138,16 @@ void List::remove(int const &value)
             return;
         }
         tmp = tmp->next;
+    }
+}
+
+void List::empty_list()
+{
+    while (!is_empty())
+    { 
+        Node *tmp = head->next;
+        delete head;
+        head = tmp;
     }
 }
 
