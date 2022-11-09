@@ -43,7 +43,7 @@ List::List(List &&orgObj)
 {
     if (orgObj.head == nullptr)
     {
-        head == nullptr;
+        head = nullptr;
     }
     else if (orgObj.head->next != nullptr)
     {
