@@ -2,25 +2,30 @@
 #define Component_h
 #include <iostream>
 
-class Component {
+class Component
+{
 
-    protected:
-    int current;
+protected:
+    double current;
 
-    public:
+public:
     Component();
     //~Component();
 
-    void CalcCurrent(int current);
-
-}; 
+    void CalcCurrent(double current);
+};
 
 class Battery : public Component
 {
-    public:
-        Battery();
-    
+public:
+    Battery();
 
-}
+    double returnCurrent() {
+        return 5;
+    }
+
+private:
+    double current;
+};
 
 #endif
