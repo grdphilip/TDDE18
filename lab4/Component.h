@@ -4,7 +4,7 @@
 
 class Component {
 
-    private:
+    protected:
     int current;
 
     public:
@@ -13,6 +13,14 @@ class Component {
 
     void CalcCurrent(int current);
 
-};
+}; 
+
+class Battery : public Component
+{
+    public:
+        Battery();
+    
+
+}
 
 #endif

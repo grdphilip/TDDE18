@@ -8,6 +8,12 @@ Component::Component()
     cout << "Hello" << endl;
  }
 
+Component::Battery()
+    : current{} 
+    {
+        cout << "Battery" << endl;
+    }
+
 void Component::CalcCurrent(int current)
 {
     cout << current << endl;
