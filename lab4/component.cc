@@ -14,6 +14,12 @@ Battery::Battery()
         cout << "Battery" << endl;
     }
 
+Resistor::Resistor()
+        : Component{}, current{}
+    {
+        cout << "Resistor" << endl;
+    }
+
 void Component::CalcCurrent(double current)
 {
     cout << current << endl;

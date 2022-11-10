@@ -28,4 +28,17 @@ private:
     double current;
 };
 
+class Resistor : public Component
+{
+public:
+    Resistor();
+
+    double returnCurrent() {
+        return 5;
+    }
+
+private:
+    double current;
+};
+
 #endif
