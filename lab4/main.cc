@@ -6,9 +6,9 @@ int main(){
     std::vector<Component> net{};
     Component c;
     Battery b;
-    Resistor r;
+    Resistor r{"R2"};
     c.CalcCurrent(4);
-    
+
     return 0;
 
 }

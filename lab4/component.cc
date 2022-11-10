@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Component::Component()
+Component::Component(string name)
     : current{}
  {
     cout << "Hello" << endl;
@@ -14,7 +14,7 @@ Battery::Battery()
         cout << "Battery" << endl;
     }
 
-Resistor::Resistor()
+Resistor::Resistor(string name)
         : Component{}, current{}
     {
         cout << "Resistor" << endl;
