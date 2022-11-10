@@ -15,7 +15,8 @@ public:
     Component() = default;
     //~Component();
 
-    void CalcCurrent(double current);
+    void calcCurrent(double current, double ohm);
+    std::string print();
 };
 
 class Battery : public Component
@@ -28,6 +29,8 @@ public:
 
 private:
     double current;
+    int integer;
+        
 };
 
 class Resistor : public Component
@@ -36,7 +39,19 @@ public:
     Resistor(std::string name);
 
     double returnCurrent();
-    double calcCurrent(double current);
+    double calcCurrent(double current, double ohm);
+
+private:
+    double current;
+};
+
+class Capacitor : public Component
+{
+public:
+    Capacitor(std::string name);
+
+    double returnCurrent();
+    double calcCurrent(double current, double ohm);
 
 private:
     double current;

@@ -8,11 +8,26 @@ Component::Component(string name)
     cout << "Hello" << endl;
  }
 
+string Component::print() {
+    return "hello";
+}
+
 Battery::Battery()
         : Component{}, current{}
     {
         cout << "Battery" << endl;
     }
+
+    Capacitor::Capacitor(string name)
+        : Component{}, current{}
+    {
+        cout << "Capacitor" << endl;
+    }
+
+void Component::calcCurrent(double current, double ohm)
+{
+    cout << current << endl;
+}
 
 Resistor::Resistor(string name)
         : Component{}, current{}
@@ -20,8 +35,10 @@ Resistor::Resistor(string name)
         cout << "Resistor" << endl;
     }
 
-void Component::CalcCurrent(double current)
-{
+double Resistor::calcCurrent(double current, double ohm) {
+    current = current/ohm;
     cout << current << endl;
+    return current;
 }
+
 
