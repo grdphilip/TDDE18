@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iomanip>
 
+
 /*
 Class
 @param
@@ -21,24 +22,25 @@ private:
 
     Node *head{};
     Node *tail{};
-
+    void sorted_insert(Node *tmp_sort);
+    void print_list(Node const *tmp) const;
 public:
     List();
     List(const List &orgObj);
     List(List &&orgObj);
     ~List();
-
+    
     List &operator=(const List &orgObj);
     List &operator=(List &&orgObj);
     void insert(int const &value);
-    void sorted_insert(Node *tmp_sort);
+    
     void remove(int const &value);
     void empty_list();
-    int const &get_index_at(int const &index);
-    void print();
-    void print_list(Node *tmp);
-    bool const is_empty();
-    int const size();
+    int get_index_at(int const &index) const;
+    void print() const;
+    
+    bool is_empty() const;
+    int size() const;
 };
 
 #endif

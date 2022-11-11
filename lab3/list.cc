@@ -1,5 +1,5 @@
 
-#include "List.h"
+#include "list.h"
 
 using namespace std;
 
@@ -11,13 +11,13 @@ List::List(const List &orgObj)
 {
     if (orgObj.head == nullptr)
     {
-        head == nullptr;
+        head = nullptr;
     }
     else
     {
         Node *tmp{};
         tmp = orgObj.head;
-
+        if(orgObj.size() > 1) {
         while (tmp->next != nullptr)
         {
             Node *copy = new Node{tmp->value, nullptr};
@@ -36,7 +36,12 @@ List::List(const List &orgObj)
         Node *copy = new Node{tmp->value, nullptr};
         tail->next = copy;
         tail = copy;
-    }
+    } else {
+        Node *copy = new Node{tmp->value, nullptr};
+        head = copy;
+        tail = copy;
+    }}
+
 }
 
 List::List(List &&orgObj)
@@ -45,11 +50,11 @@ List::List(List &&orgObj)
     {
         head = nullptr;
     }
-    else if (orgObj.head->next != nullptr)
+    else if (orgObj.size() > 0)
     {
         head = orgObj.head;
         orgObj.head = nullptr;
-        delete orgObj.head;
+        
     }
 }
 
@@ -68,7 +73,6 @@ List &List::operator=(List &&orgObj)
     empty_list();
     head = orgObj.head;
     orgObj.head = nullptr;
-    delete orgObj.head;
     return *this;
 }
 
@@ -100,8 +104,7 @@ void List::insert(int const &value)
 
 void List::sorted_insert(Node *tmp_sort)
 {
-    Node *iterator{nullptr};
-    iterator = head;
+    Node *iterator{head};
 
     while (iterator->next != nullptr)
     {
@@ -125,6 +128,7 @@ void List::sorted_insert(Node *tmp_sort)
 
 void List::remove(int const &value)
 {
+    if(!is_empty()) {
     Node *tmp{nullptr}, *dummy{nullptr};
     tmp = head;
     while (tmp->next != nullptr)
@@ -133,12 +137,11 @@ void List::remove(int const &value)
         {
             dummy = tmp->next;
             tmp->next = dummy->next;
-            dummy->next = nullptr;
             delete dummy;
             return;
         }
         tmp = tmp->next;
-    }
+    }}
 }
 
 void List::empty_list()
@@ -151,27 +154,34 @@ void List::empty_list()
     }
 }
 
-int const &List::get_index_at(int const &index)
+int List::get_index_at(int const &index) const
 {
     Node *tmp;
     tmp = head;
 
+    if(index > size() || index < 0) {
+        cout << "ERROR: boundary not in scope";
+        return 0;
+    }
+    
     for (int i = 0; i <= index - 1; i++)
     {
         tmp = tmp->next;
     }
+    cout << tmp->value << endl;
     return tmp->value;
 }
 
-void List::print()
+void List::print() const
 {
     Node *tmp;
     tmp = head;
 
     print_list(tmp);
 }
-
-void List::print_list(Node *tmp)
+//We asked an assistant about this and they said that this was the correct way.
+//There was no need to take an ostream argument or return a string
+void List::print_list(Node const *tmp) const
 {
     if (tmp != nullptr)
     {
@@ -180,12 +190,12 @@ void List::print_list(Node *tmp)
     }
 }
 
-bool const List::is_empty()
+bool List::is_empty() const
 {
     return head == nullptr;
 }
 
-int const List::size()
+int List::size() const
 {
 
     int length{0};

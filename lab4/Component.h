@@ -9,6 +9,7 @@ class Component
 
 protected:
     double current;
+    int terminalA, terminalB;
 
 public:
     Component(std::string name);
@@ -29,7 +30,7 @@ public:
 
 private:
     double current;
-    int integer;
+    
         
 };
 

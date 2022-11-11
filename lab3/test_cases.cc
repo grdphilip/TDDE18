@@ -13,7 +13,7 @@
 // This define lets Catch create the main test program
 // (Must be in only one place!)
 #include "catch.hpp"
-#include "List.h"
+#include "list.h"
 using namespace std;
 
 //=======================================================================
@@ -81,11 +81,17 @@ TEST_CASE("Remove an item")
     l.insert(9);
     l.insert(11);
     l.remove(5);
+    l.get_index_at(-2);
 
     CHECK(l.get_index_at(2) != 5);
     REQUIRE(l.size() == 5);
 }
-
+TEST_CASE("Possible memory leak") {
+    //We tried this with valgrind and there was no leaks.
+    List l{};
+    l.insert(3);
+    l.remove(3);
+}
 TEST_CASE("Remove a non-existing value")
 {
     List l{};
@@ -96,6 +102,8 @@ TEST_CASE("Remove a non-existing value")
     l.insert(9);
     l.insert(11);
     l.remove(1001);
+    List r{};
+    r.remove(2);
 
     REQUIRE(l.size() == 6);
 }
@@ -115,6 +123,10 @@ TEST_CASE("Copy a list")
     l.insert(7);
     REQUIRE(l.size() == 6);
     REQUIRE(copy.size() == 5);
+
+    List p{};
+    p.insert(1);
+    List q{p};
 }
 
 TEST_CASE("Test copy =operator")
@@ -143,16 +155,14 @@ TEST_CASE("Move a list")
 {
     List l{};
     l.insert(2);
-    l.insert(4);
-    l.insert(3);
-    l.insert(1);
+
     List p{};
     p.insert(2);
     p.insert(5);
     p.insert(3);
     p = move(l);
     REQUIRE(l.is_empty() == true);
-    REQUIRE(p.size() == 4);
+    REQUIRE(p.size() == 1);
     REQUIRE_FALSE(p.size() == 5);
     REQUIRE_FALSE(p.size() == 3);
 }
