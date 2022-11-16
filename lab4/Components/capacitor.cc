@@ -10,5 +10,5 @@ using namespace std;
     }
 
     double Capacitor::calcCurrent(double current, double ohm) {
-        return 1.4;
+        return current/ohm;
     }

@@ -2,6 +2,7 @@
 #include "Components/resistor.h"
 #include "Components/capacitor.h"
 #include "Components/terminal.h"
+#include "simulator.h"
 #include "vector"
 #include <iostream>
 
@@ -20,17 +21,17 @@ int main(){
     Terminal t3{};
 
     Battery b{"B1",20,t1,t2};
-    Resistor r{"R1",6,t2,t3};
-    Resistor r{"R2",6,t3,t1};
+    Resistor r1{"R1",6,t2,t3};
+    Resistor r2{"R2",6,t3,t1};
   
-    b.set_voltage(24);
     cout << b.get_voltage();
     vec.push_back(b);
+    vec.push_back(r1);
+    vec.push_back(r2);
 
-    for ( Component i: vec) {
-        cout << i.print() << endl;
-    }
 
+    Simulator s{vec,10,10,10};
+    s.simulate();
 
     return 0;
 
