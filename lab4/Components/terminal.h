@@ -6,7 +6,7 @@
 class Terminal
 {
 public:
-    Terminal() = default;
+    Terminal(); 
     ~Terminal();
     double charge;
 };

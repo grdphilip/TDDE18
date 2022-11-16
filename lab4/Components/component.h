@@ -14,7 +14,7 @@ public:
     Component() = default;
     //~Component();
 
-    virtual void calcCurrent(double current, double ohm);
+    virtual double calcCurrent(double current, double ohm);
     std::string print();
 };
 

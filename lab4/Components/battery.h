@@ -10,14 +10,13 @@ public:
     Battery();
 
     double returnCurrent();
-    double calcCurrent(double current) override;
+    double calcCurrent(double current);
     int get_voltage() const;
     void set_voltage(int const &value);
 
 private:
     double voltage;
-    Terminal *in;
-    Terminal *out;
+    
 };
 
 #endif

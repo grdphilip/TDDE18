@@ -8,8 +8,7 @@ class Capacitor : public Component
 {
 public:
     Capacitor(std::string name);
-    double returnCurrent();
-    double calcCurrent(double current, double ohm) override;
+    double calcCurrent(double current, double ohm);
 
 private:
     double current;

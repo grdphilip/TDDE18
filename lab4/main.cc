@@ -13,7 +13,6 @@ int main(){
     
     std::vector<Component> vec{};
     
-
     Resistor r{"R2",20};
     Component c;
     Battery b;
@@ -26,7 +25,6 @@ int main(){
         cout << i.print() << endl;
     }
 
-    Capacitor cap{"C2"};
     r.calcCurrent(4,2);
 
     return 0;

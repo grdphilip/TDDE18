@@ -13,9 +13,9 @@ string Component::print() {
 }
 
 
-void Component::calcCurrent(double current, double ohm)
+double Component::calcCurrent(double current, double ohm)
 {
-    cout << current/ohm;
+    return current/ohm;
 }
 
 
