@@ -7,7 +7,7 @@ class Terminal
 {
 public:
     Terminal(); 
-    ~Terminal();
+    //~Terminal();
     double charge;
 };
 

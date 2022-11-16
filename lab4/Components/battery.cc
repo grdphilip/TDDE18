@@ -2,8 +2,8 @@
 
 using namespace std;
 
-Battery::Battery()
-        : Component{}, voltage{}
+Battery::Battery(string name, double volt, Terminal &input, Terminal &output)
+        : Component{name, input, output}, voltage{volt}
     {
         cout << "Battery" << endl;
     }

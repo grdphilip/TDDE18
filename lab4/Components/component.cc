@@ -2,8 +2,8 @@
 
 using namespace std;
 
-Component::Component(string name)
-    : current{}
+Component::Component(string name, Terminal &input, Terminal &output)
+    : name{name}, in{input}, out{output}
  {
     cout << "Hello" << endl;
  }

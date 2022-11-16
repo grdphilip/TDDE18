@@ -7,7 +7,7 @@
 class Battery : public Component
 {
 public:
-    Battery();
+    Battery(std::string name, double volt, Terminal &input, Terminal &output);
 
     double returnCurrent();
     double calcCurrent(double current);

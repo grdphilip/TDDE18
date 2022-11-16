@@ -2,8 +2,8 @@
 
 using namespace std;
 
-Resistor::Resistor(string name, double ohm)
-        : Component{}, current{}
+Resistor::Resistor(string name, double ohm, Terminal &input, Terminal &output)
+        : Component{name, input, output}, current{ohm}
     {
         cout << "Resistor" << endl;
     }
