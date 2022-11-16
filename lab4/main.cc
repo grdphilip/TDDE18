@@ -17,8 +17,11 @@ int main(){
 
     Terminal t1{};
     Terminal t2{};
+    Terminal t3{};
+
     Battery b{"B1",20,t1,t2};
-    Resistor r{"R1",6,t2,t1};
+    Resistor r{"R1",6,t2,t3};
+    Resistor r{"R2",6,t3,t1};
   
     b.set_voltage(24);
     cout << b.get_voltage();
