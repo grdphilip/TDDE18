@@ -2,16 +2,26 @@
 #define SIMULATOR_H
 #include <iostream>
 #include <string>
+#include <vector>
+#include "Components/component.h"
 
-class simulator
+
+class Simulator
 {
 
 
 public:
-    simulator(int iterations, int lines, double steps, double volt);
-    ~simulator();
+    Simulator(std::vector<Component*> vec, int iterations, int lines, double time);
+    void simulate();
+    //~simulator();
 
 private:
-    
+    std::vector<Component*> components;
+    int lines;
+    int iterations;
+    double time;
+
 };
+
+#endif
 

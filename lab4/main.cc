@@ -1,8 +1,11 @@
 #include "Components/battery.h"
 #include "Components/resistor.h"
 #include "Components/capacitor.h"
+#include "Components/terminal.h"
+#include "simulator.h"
 #include "vector"
 #include <iostream>
+
 
 using namespace std;
 
@@ -11,23 +14,22 @@ using namespace std;
 
 int main(){
     
-    std::vector<Component> vec{};
-    
+    std::vector<Component*> vec{};
 
-    Resistor r{"R2",20};
-    Component c;
-    Battery b;
-    b.set_voltage(24);
-    cout << b.get_voltage();
-    vec.push_back(r);
-    vec.push_back(b);
+    Terminal p{};
+    Terminal r124{};
+    Terminal n{};
 
-    for ( Component i: vec) {
-        cout << i.print() << endl;
-    }
+    Battery b{"B1",24,n,p};
+    Resistor r1{"R1",6,p,r124};
+    Resistor r2{"R2",6,r124,n};
+    vec.push_back(&b);
+    vec.push_back(&r1);
+    vec.push_back(&r2);
 
-    Capacitor cap{"C2"};
-    r.calcCurrent(4,2);
+
+    Simulator s{vec,200000,10,0.01};
+    s.simulate();
 
     return 0;
 

@@ -7,17 +7,17 @@
 class Battery : public Component
 {
 public:
-    Battery();
+    Battery(std::string name, double volt, Terminal &input, Terminal &output);
 
-    double returnCurrent();
-    double calcCurrent(double current) override;
     int get_voltage() const;
     void set_voltage(int const &value);
+    double get_current() const;
+    void print_component() override;
+    void calcCurrent(double const &time) override;
 
 private:
     double voltage;
-    Terminal *in;
-    Terminal *out;
+    
 };
 
 #endif

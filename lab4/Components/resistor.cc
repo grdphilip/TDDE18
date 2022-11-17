@@ -2,14 +2,38 @@
 
 using namespace std;
 
-Resistor::Resistor(string name, double ohm)
-        : Component{}, current{}
+Resistor::Resistor(string name, double ohm, Terminal &input, Terminal &output)
+        : Component{name, input, output}, current{ohm}
     {
-        cout << "Resistor" << endl;
+
     }
 
-double Resistor::calcCurrent(double current, double ohm) {
-    current = current/ohm;
-    cout << current << endl;
-    return current;
+
+double Resistor::get_current() const{
+
+    return abs(in.charge-out.charge)/current;
+}
+
+
+
+
+void Resistor::calcCurrent(double const &time) {
+
+    if(in.charge > out.charge) {
+        in.set_charge(in.charge -= get_current()*time);
+        out.set_charge(out.charge += get_current()*time);  
+    }
+    else if(in.charge < out.charge) {
+        in.set_charge(in.charge += get_current()*time);
+        out.set_charge(out.charge-=get_current()*time);
+    } else {
+
+    }
+    
+   
+} 
+
+void Resistor::print_component() {
+    cout << get_current() << fixed << setprecision(2) << "    ";
+    cout << out.get_charge() << fixed << setprecision(2) << "    ";
 }

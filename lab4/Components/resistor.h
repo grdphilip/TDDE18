@@ -7,10 +7,12 @@
 class Resistor : public Component
 {
 public:
-    Resistor(std::string name, double ohm);
+    Resistor(std::string name, double ohm, Terminal &input, Terminal &output);
 
     double returnCurrent();
-    double calcCurrent(double current, double ohm) override;
+    void calcCurrent(double const &time) override;
+    double get_current() const;
+    void print_component();
 
 private:
     double current;

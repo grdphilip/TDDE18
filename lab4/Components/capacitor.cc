@@ -1,4 +1,5 @@
 #include "capacitor.h"
+#include <string>
 
 using namespace std;
 
@@ -6,4 +7,8 @@ using namespace std;
         : Component{}, current{}
     {
         cout << "Capacitor" << endl;
+    }
+
+    double Capacitor::calcCurrent(double current, double ohm) {
+        return current/ohm;
     }

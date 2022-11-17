@@ -6,9 +6,11 @@
 class Terminal
 {
 public:
-    Terminal() = default;
-    ~Terminal();
+    Terminal(); 
+    //~Terminal();
     double charge;
+    void set_charge(double const &value);
+    double get_charge();
 };
 
 #endif
