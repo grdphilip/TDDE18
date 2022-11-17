@@ -7,11 +7,6 @@ Component::Component(string name, Terminal &input, Terminal &output)
 {
 }
 
-string Component::print()
-{
-
-    return name;
-}
 double Component::get_current() const
 {
     return 0;
@@ -21,15 +16,10 @@ double Component::get_charge() const
     return abs(in.charge - out.charge);
 }
 
-void Component::calcCurrent(double time)
-{
-    
-}
+
 
 Component::~Component()
 {
 }
 
-void Component::print_component() {
 
-}

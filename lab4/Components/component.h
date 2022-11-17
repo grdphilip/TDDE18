@@ -2,6 +2,7 @@
 #define Component_h
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "terminal.h"
 
 class Component
@@ -19,9 +20,9 @@ public:
     ~Component();
     double get_charge() const;
     virtual double get_current() const;
-    virtual void calcCurrent(double time);
-    virtual void print_component();
-    std::string print();
+    virtual void calcCurrent(double const &time) = 0;
+    virtual void print_component() = 0;
+
     
     
 };

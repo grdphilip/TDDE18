@@ -9,11 +9,11 @@ class Battery : public Component
 public:
     Battery(std::string name, double volt, Terminal &input, Terminal &output);
 
-    double returnCurrent();
     int get_voltage() const;
     void set_voltage(int const &value);
     double get_current() const;
-    void print_component();
+    void print_component() override;
+    void calcCurrent(double const &time) override;
 
 private:
     double voltage;

@@ -11,7 +11,7 @@ Resistor::Resistor(string name, double ohm, Terminal &input, Terminal &output)
 
 double Resistor::get_current() const{
 
-    return (abs(in.charge-out.charge)/current);
+    return abs(in.charge-out.charge)/current;
 }
 
 
@@ -34,6 +34,6 @@ void Resistor::calcCurrent(double const &time) {
 } 
 
 void Resistor::print_component() {
-    cout << get_current() << " ";
-    cout << out.get_charge() << endl;
+    cout << get_current() << fixed << setprecision(2) << "    ";
+    cout << out.get_charge() << fixed << setprecision(2) << "    ";
 }

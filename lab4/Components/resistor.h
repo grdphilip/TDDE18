@@ -10,7 +10,7 @@ public:
     Resistor(std::string name, double ohm, Terminal &input, Terminal &output);
 
     double returnCurrent();
-    void calcCurrent(double const &time);
+    void calcCurrent(double const &time) override;
     double get_current() const;
     void print_component();
 
