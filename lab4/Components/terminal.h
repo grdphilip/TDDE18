@@ -9,6 +9,8 @@ public:
     Terminal(); 
     //~Terminal();
     double charge;
+    void set_charge(double const &value);
+    double get_charge();
 };
 
 #endif

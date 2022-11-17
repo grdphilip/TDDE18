@@ -12,6 +12,7 @@ public:
     double returnCurrent();
     void calcCurrent(double const &time);
     double get_current() const;
+    void print_component();
 
 private:
     double current;

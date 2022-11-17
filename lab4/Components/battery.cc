@@ -10,7 +10,7 @@ Battery::Battery(string name, double volt, Terminal &input, Terminal &output)
     }
 
 double Battery::get_current() const{
-    return (abs(in.charge-out.charge)/current);
+    return 0.0;
 }
 
 void Battery::set_voltage(int const &value) {
@@ -20,5 +20,10 @@ void Battery::set_voltage(int const &value) {
 
 int Battery::get_voltage() const {
     return this->voltage;
+}
+
+void Battery::print_component() {
+    cout << get_voltage() << " ";
+    cout << get_current() << endl;
 }
 

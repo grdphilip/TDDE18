@@ -19,7 +19,8 @@ public:
     ~Component();
     double get_charge() const;
     virtual double get_current() const;
-    virtual void calcCurrent(double ohm, Terminal &in, Terminal &out);
+    virtual void calcCurrent(double time);
+    virtual void print_component();
     std::string print();
     
     
