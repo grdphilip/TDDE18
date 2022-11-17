@@ -14,12 +14,15 @@ protected:
     Terminal &out;
 
 public:
-    Component(std::string name, Terminal &p, Terminal &n);
+    Component(std::string name, Terminal &in, Terminal &out);
     
-    //~Component();
-
-    virtual double calcCurrent(double current, double ohm);
+    ~Component();
+    double get_charge() const;
+    virtual double get_current() const;
+    virtual void calcCurrent(double ohm, Terminal &in, Terminal &out);
     std::string print();
+    
+    
 };
 
 #endif

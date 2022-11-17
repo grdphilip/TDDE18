@@ -5,11 +5,30 @@ using namespace std;
 Resistor::Resistor(string name, double ohm, Terminal &input, Terminal &output)
         : Component{name, input, output}, current{ohm}
     {
-        cout << "Resistor" << endl;
+
     }
 
-double Resistor::calcCurrent(double current, double ohm) {
-    current = current/ohm;
-    cout << current << endl;
-    return current;
+
+double Resistor::get_current() const{
+
+    return (abs(in.charge-out.charge)/current);
 }
+
+
+
+
+void Resistor::calcCurrent(double const &time) {
+
+    if(in.charge > out.charge) {
+        in.charge -= get_current()*time;
+        out.charge += get_current()*time;   
+    }
+    else if(in.charge < out.charge) {
+        in.charge += get_current()*time;
+        out.charge-=get_current()*time;
+    } else {
+        return;
+    }
+    
+   
+} 

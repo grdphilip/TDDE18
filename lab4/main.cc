@@ -14,7 +14,7 @@ using namespace std;
 
 int main(){
     
-    std::vector<Component> vec{};
+    std::vector<Component*> vec{};
 
     Terminal t1{};
     Terminal t2{};
@@ -23,14 +23,12 @@ int main(){
     Battery b{"B1",20,t1,t2};
     Resistor r1{"R1",6,t2,t3};
     Resistor r2{"R2",6,t3,t1};
-  
-    cout << b.get_voltage();
-    vec.push_back(b);
-    vec.push_back(r1);
-    vec.push_back(r2);
+    vec.push_back(&b);
+    vec.push_back(&r1);
+    vec.push_back(&r2);
 
 
-    Simulator s{vec,10,10,10};
+    Simulator s{vec,1000,10,0.1};
     s.simulate();
 
     return 0;
