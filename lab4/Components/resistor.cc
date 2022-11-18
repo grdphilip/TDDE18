@@ -8,10 +8,13 @@ Resistor::Resistor(string name, double ohm, Terminal &input, Terminal &output)
 
     }
 
+Resistor::~Resistor() {
+    
+}
 
 double Resistor::get_current() const{
 
-    return abs(in.charge-out.charge)/current;
+    return (abs(in.charge-out.charge)/current);
 }
 
 
@@ -19,21 +22,18 @@ double Resistor::get_current() const{
 
 void Resistor::calcCurrent(double const &time) {
 
+    charge_difference = get_current() * time;
     if(in.charge > out.charge) {
-        in.set_charge(in.charge -= get_current()*time);
-        out.set_charge(out.charge += get_current()*time);  
+        in.charge -= charge_difference;
+        out.charge += charge_difference;
+        
     }
-    else if(in.charge < out.charge) {
-        in.set_charge(in.charge += get_current()*time);
-        out.set_charge(out.charge-=get_current()*time);
-    } else {
+    else {
+        in.charge += charge_difference;
+        out.charge -= charge_difference;
 
-    }
+    } 
     
    
 } 
 
-void Resistor::print_component() {
-    cout << get_current() << fixed << setprecision(2) << "    ";
-    cout << out.get_charge() << fixed << setprecision(2) << "    ";
-}

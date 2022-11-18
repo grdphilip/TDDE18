@@ -7,11 +7,6 @@ Terminal::Terminal()
 {
 }
 
-void Terminal::set_charge(double const &value) {
-    charge = value;
-}
-
-
-double Terminal::get_charge() {
-    return charge;
+Terminal::~Terminal() {
+    
 }

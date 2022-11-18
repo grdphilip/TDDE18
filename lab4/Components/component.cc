@@ -7,19 +7,18 @@ Component::Component(string name, Terminal &input, Terminal &output)
 {
 }
 
-double Component::get_current() const
-{
-    return 0;
+Component::~Component() {
+    
 }
 double Component::get_charge() const
 {
-    return abs(in.charge - out.charge);
+    return (abs(out.charge-in.charge));
+}
+
+string Component::get_name() const {
+    return name;
 }
 
 
-
-Component::~Component()
-{
-}
 
 

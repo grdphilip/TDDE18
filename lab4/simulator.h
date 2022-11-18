@@ -11,9 +11,12 @@ class Simulator
 
 
 public:
-    Simulator(std::vector<Component*> vec, int iterations, int lines, double time);
+    Simulator(std::vector<Component*> vec, int iterations, int lines, double const time);
     void simulate();
     //~simulator();
+    void print_values(std::vector<Component*> vec);
+    void print_info(std::vector<Component*> vec);
+    void empty_vec();
 
 private:
     std::vector<Component*> components;
