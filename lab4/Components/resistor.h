@@ -8,14 +8,14 @@ class Resistor : public Component
 {
 public:
     Resistor(std::string name, double ohm, Terminal &input, Terminal &output);
-
-    double returnCurrent();
+    ~Resistor();
     void calcCurrent(double const &time) override;
     double get_current() const;
-    void print_component();
+
 
 private:
     double current;
+    double charge_difference;
 };
 
 #endif

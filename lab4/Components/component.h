@@ -19,9 +19,10 @@ public:
     
     ~Component();
     double get_charge() const;
-    virtual double get_current() const;
+    virtual double get_current() const = 0;
     virtual void calcCurrent(double const &time) = 0;
-    virtual void print_component() = 0;
+    std::string get_name() const;
+
 
     
     
