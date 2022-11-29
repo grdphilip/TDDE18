@@ -14,7 +14,7 @@ public:
 
 
 private:
-    double current;
+    double current{};
     double charge_difference;
 };
 

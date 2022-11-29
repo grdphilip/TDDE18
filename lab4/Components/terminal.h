@@ -9,7 +9,6 @@ public:
     Terminal(); 
     ~Terminal();
     double charge;
-
 };
 
 #endif
