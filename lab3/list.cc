@@ -160,7 +160,6 @@ int List::get_index_at(int const &index) const
     tmp = head;
 
     if(index > size() || index < 0) {
-        cout << "ERROR: boundary not in scope";
         return 0;
     }
     
@@ -168,7 +167,7 @@ int List::get_index_at(int const &index) const
     {
         tmp = tmp->next;
     }
-    cout << tmp->value << endl;
+
     return tmp->value;
 }
 

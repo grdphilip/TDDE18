@@ -81,7 +81,7 @@ TEST_CASE("Remove an item")
     l.insert(9);
     l.insert(11);
     l.remove(5);
-    l.get_index_at(-2);
+    l.get_index_at(-400000000);
 
     CHECK(l.get_index_at(2) != 5);
     REQUIRE(l.size() == 5);

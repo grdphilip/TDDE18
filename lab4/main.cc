@@ -15,12 +15,12 @@ void circuit_builder1(int const iterations, int const lines, double const time, 
     Terminal p{};
     Terminal n{};
     Terminal r124{};
-    Terminal r32{};
+    Terminal r23{};
 
     vec.push_back(new Battery("Bat",voltage,n,p));
     vec.push_back(new Resistor("R1",6,p,r124));
-    vec.push_back(new Resistor("R2",4,r124,r32));
-    vec.push_back(new Resistor("R3",8,r32,n));
+    vec.push_back(new Resistor("R2",4,r124,r23));
+    vec.push_back(new Resistor("R3",8,r23,n));
     vec.push_back(new Resistor("R4",12,r124,n));
     Simulator s{vec,iterations,lines,time};
     s.simulate();
@@ -95,12 +95,6 @@ try {
 } catch(invalid_argument& a) {
     cout << "ERROR: " << a.what() << endl;
 } 
-
-    
-
-
-
-
     return 0;
 
 }
