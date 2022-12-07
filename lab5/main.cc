@@ -15,8 +15,12 @@ using namespace std;
 
 void findFrequency(vector<string> text{};) {
 };
-
 */
+bool sortbysec(const pair<string,int> &a,
+              const pair<string,int> &b)
+{
+    return (a.second < b.second);
+}
 
 int main(int argc, char **argv)
 {
@@ -54,21 +58,29 @@ int main(int argc, char **argv)
 
         for_each(text.begin(), text.end(), [&frequency](string s)
                  {
-                     frequency.push_back(make_pair(s, 1));
-                     sort(frequency.begin(), frequency.end());
-                     auto counter = adjacent_find(frequency.begin(), frequency.end());
-
-                     if (counter != frequency.end())
+                     if (frequency.empty())
                      {
-                         frequency.erase(frequency.begin() + distance(frequency.begin(), counter));
-                         frequency[std::distance(frequency.begin(), counter)].second++;
+                         frequency.push_back(make_pair(s, 1));
+                     }
+                     else
+                     {
+                       auto it = std::find_if( frequency.begin(), frequency.end(),[&s]
+                       (const std::pair<std::string, int>& element){ return element.first == s;} );
+                       
+                       if( it != frequency.end()) {
+                        frequency[distance(frequency.begin(), it)].second++;
+                       } else {
+                        frequency.push_back(make_pair(s, 1));
+                       }     
                         
-                         
                      } });
 
-                for (int i = 0; i < frequency.size(); i++)
+            sort(frequency.begin(), frequency.end(), sortbysec);
+            reverse(frequency.begin(), frequency.end());
+
+        for (int i = 0; i < frequency.size(); i++)
         {
-            cout << frequency[i].first << ", " << frequency[i].second << endl;
+            cout << frequency[i].first << " " << frequency[i].second << endl;
         }
     }
 }
@@ -88,11 +100,18 @@ frequency.erase(frequency.begin() + distance(frequency.begin(), counter));
 
 frequency.erase(frequency.begin() + distance(frequency.begin(), counter));
 
-copy(wordmap.begin(), wordmap.end(), [](const pair<string, int> &itp)
-         { cout << itp.first << ": " << itp.second << endl; });
+ for_each(text.begin(), text.end(), [&frequency](string s)
+                 {
+                     frequency.push_back(make_pair(s, 1));
+                     sort(frequency.begin(), frequency.end());
+                     auto counter = adjacent_find(frequency.begin(), frequency.end());
 
-for (auto it = wordmap.cbegin(); it != wordmap.cend(); ++it)
-{
-    std::cout << it->first << " " << it->second << endl;
-}
+                     if (counter != frequency.end())
+                     {
+                         frequency.erase(frequency.begin() + distance(frequency.begin(), counter));
+                         frequency[std::distance(frequency.begin(), counter)].second++;
+
+
+                     } });
+
 */
