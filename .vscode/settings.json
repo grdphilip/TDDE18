@@ -112,7 +112,8 @@
         "vec4ub": "cpp",
         "vec4ui": "cpp",
         "vec4us": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "filesystem": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
