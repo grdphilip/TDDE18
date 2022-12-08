@@ -65,7 +65,7 @@ int main(int argc, char **argv)
                      else
                      {
                        auto it = std::find_if( frequency.begin(), frequency.end(),[&s]
-                       (const std::pair<std::string, int>& element){ return element.first == s;} );
+                       (const std::pair<std::string, int>& p){ return p.first == s;} );
                        
                        if( it != frequency.end()) {
                         frequency[distance(frequency.begin(), it)].second++;
