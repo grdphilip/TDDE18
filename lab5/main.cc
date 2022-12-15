@@ -1,5 +1,5 @@
+#include "text_handler.h"
 #include <iostream>
-#include <iomanip>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -11,107 +11,97 @@
 
 using namespace std;
 
-/*
-
-void findFrequency(vector<string> text{};) {
-};
-*/
-bool sortbysec(const pair<string,int> &a,
-              const pair<string,int> &b)
+void create_text_file(vector<string> &text, vector<string> file_args)
 {
-    return (a.second < b.second);
+    string inFile = file_args[0];
+    ifstream textFile{inFile};
+    if (textFile.fail())
+    {
+        cout << "CERR: This is not a correct text file" << endl;
+        exit(EXIT_FAILURE);
+    }
+    copy(istream_iterator<string>(textFile), istream_iterator<string>(), back_insert_iterator<vector<string>>(text));
+}
+
+void process_args(vector<string> &text, text_handler &handler, string &arg)
+{
+
+    string delimiter_1 = "=";
+    string delimiter_2 = "+";
+    string raw_input = arg;
+    string flag{};
+    string value_1{};
+    string value_2{};
+
+    flag = raw_input.substr(0, raw_input.find(delimiter_1));
+
+    if (flag == "--print")
+    {
+        handler.print(text);
+    }
+    else if (flag == "--remove")
+    {
+        if (raw_input.find(delimiter_1) == 8)
+        {
+            raw_input.erase(0, raw_input.find(delimiter_1) + delimiter_1.length());
+            value_1 = raw_input.substr(0, raw_input.length());
+        }
+        if (!value_1.empty())
+        {
+            handler.erase(text, value_1);
+        }
+        else
+        {
+            cerr << "ERROR: This is not a correct fromat for this flag" << endl;
+            cout << "Correct format: --remove=<word>" << endl;
+            exit(EXIT_FAILURE);
+        }
+    }
+    else if (flag == "--substitute")
+    {
+        if (raw_input.find(delimiter_1) == 12)
+        {
+            raw_input.erase(0, raw_input.find(delimiter_1) + delimiter_1.length());
+            value_1 = raw_input.substr(0, raw_input.find(delimiter_2));
+            raw_input.erase(0, raw_input.find(delimiter_2) + delimiter_2.length());
+            value_2 = raw_input.substr(0, raw_input.length());
+        }
+        if (!value_1.empty() && !value_2.empty())
+        {
+            handler.substitute(text, value_1, value_2);
+        }
+        else
+        {
+            cerr << "ERROR: This is not a correct fromat for this flag" << endl;
+            cout << "Correct format: --subsitute=<word>+<word>" << endl;
+            exit(EXIT_FAILURE);
+        }
+    }
+    else if (flag == "--frequency")
+    {
+        handler.frequency(text);
+    }
+    else if (flag == "--table")
+    {
+        handler.table(text);
+    }
+    else
+    {
+        cerr << "ERROR: This is not a correct flag" << endl;
+        cout << "Available flags: --print, --remove=<word>, --frequency, --table, --subsitute=<word>+<word>" << endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 int main(int argc, char **argv)
 {
 
-    string inFile = argv[1];
-    ifstream textFile{inFile};
     vector<string> text{};
-    copy(istream_iterator<string>(textFile), istream_iterator<string>(), back_insert_iterator<vector<string>>(text));
+    vector<string> file_args(argv + 1, argv + argc);
+    create_text_file(text, file_args);
+    text_handler handler{};
     vector<string> args(argv + 2, argv + argc);
 
-    auto print = [](std::pair<const string, int> &itp)
-    { cout << " " << itp.first << " " << itp.second << endl; };
-
-    if (args[0] == "--print")
-    {
-        copy(text.begin(), text.end(), ostream_iterator<string>(cout, " "));
-    }
-    else if (args[0] == "--table")
-
-    {
-        /*Defaults in ascending order, therefor good alternative for table */
-        map<string, int> wordmap{};
-        /*Iterator to print our map*/
-        auto print = [](std::pair<const string, int> &itp)
-        { cout << setw(11) << itp.first << " " << itp.second << endl; };
-
-        for_each(text.begin(), text.end(), [&wordmap](string s)
-                 { return wordmap[s]++; });
-
-        for_each(wordmap.begin(), wordmap.end(), print);
-    }
-    else if (args[0] == "--frequency")
-    {
-        vector<std::pair<string, int>> frequency{};
-
-        for_each(text.begin(), text.end(), [&frequency](string s)
-                 {
-                     if (frequency.empty())
-                     {
-                         frequency.push_back(make_pair(s, 1));
-                     }
-                     else
-                     {
-                       auto it = std::find_if( frequency.begin(), frequency.end(),[&s]
-                       (const std::pair<std::string, int>& p){ return p.first == s;} );
-                       
-                       if( it != frequency.end()) {
-                        frequency[distance(frequency.begin(), it)].second++;
-                       } else {
-                        frequency.push_back(make_pair(s, 1));
-                       }     
-                        
-                     } });
-
-            sort(frequency.begin(), frequency.end(), sortbysec);
-            reverse(frequency.begin(), frequency.end());
-
-        for (int i = 0; i < frequency.size(); i++)
-        {
-            cout << frequency[i].first << " " << frequency[i].second << endl;
-        }
-    }
+    for_each(args.begin(), args.end(), [&text, &handler](string arg)
+             { process_args(text, handler, arg); });
 }
-
-/*
-frequency.erase(frequency.begin() + distance(frequency.begin(), counter));
-  for (auto it = wordmap.cbegin(); it != wordmap.cend(); ++it)
-  for_each(wordmap.begin(), wordmap.end(), [](const pair<string, int> &itp)
-           { cout << itp.first << ": " << itp.second << endl; });
-  {
-      std::cout << it->first << " " << it->second << endl;
-  }
-  */
-
-// copy(wordmap.cbegin(), wordmap.cend(), ostream_iterator<string, int>(cout, " "));
-/*
-
-frequency.erase(frequency.begin() + distance(frequency.begin(), counter));
-
- for_each(text.begin(), text.end(), [&frequency](string s)
-                 {
-                     frequency.push_back(make_pair(s, 1));
-                     sort(frequency.begin(), frequency.end());
-                     auto counter = adjacent_find(frequency.begin(), frequency.end());
-
-                     if (counter != frequency.end())
-                     {
-                         frequency.erase(frequency.begin() + distance(frequency.begin(), counter));
-                         frequency[std::distance(frequency.begin(), counter)].second++;
-
-
-                     } });
-
-*/
